@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Empires - Web</title>
+    <title>Mini Empires V3</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,30 +11,77 @@
         <!-- Menu Screen -->
         <div id="menu" class="screen active">
             <div class="menu-container">
-                <h1>Mini Empires</h1>
-                <p class="subtitle">Conquer the map. Build your empire.</p>
+                <h1>⚔️ Mini Empires</h1>
+                <p class="subtitle">Conquer. Build. Dominate.</p>
                 <button id="playBtn" class="btn btn-primary">PLAY NOW</button>
                 <button id="settingsBtn" class="btn btn-secondary">Settings</button>
+            </div>
+        </div>
+
+        <!-- Game Mode Selection -->
+        <div id="gameMode" class="screen">
+            <div class="mode-container">
+                <h2>Choose Game Mode</h2>
+                
+                <div class="mode-card">
+                    <h3>VS AI Bot</h3>
+                    <p>Challenge the computer at different difficulty levels</p>
+                    <button id="botEasyBtn" class="btn btn-secondary">Easy</button>
+                    <button id="botMediumBtn" class="btn btn-secondary">Medium</button>
+                    <button id="botHardBtn" class="btn btn-secondary">Hard</button>
+                </div>
+
+                <div class="mode-card">
+                    <h3>🌐 Multiplayer</h3>
+                    <p>Play against a real player online (1v1)</p>
+                    <button id="multiplayerBtn" class="btn btn-primary">Find Match</button>
+                </div>
+
+                <button id="backFromModeBtn" class="btn btn-secondary">Back</button>
             </div>
         </div>
 
         <!-- Game Screen -->
         <div id="game" class="screen">
             <div class="game-header">
-                <div class="stats">
-                    <div class="stat">
-                        <span class="label">Gold:</span>
-                        <span id="goldCount" class="value">600</span>
-                    </div>
-                    <div class="stat">
-                        <span class="label">Oil:</span>
-                        <span id="oilCount" class="value">0</span>
-                    </div>
-                    <div class="stat">
-                        <span class="label">Population:</span>
-                        <span id="popCount" class="value">10</span>
+                <div class="player-stats">
+                    <div class="player-info">
+                        <h3>You</h3>
+                        <div class="stat">
+                            <span class="label">💰 Gold:</span>
+                            <span id="goldCount" class="value">600</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">🛢️ Oil:</span>
+                            <span id="oilCount" class="value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">🏘️ Territory:</span>
+                            <span id="popCount" class="value">1</span>
+                        </div>
                     </div>
                 </div>
+
+                <div class="vs-divider">VS</div>
+
+                <div class="opponent-stats">
+                    <div class="opponent-info">
+                        <h3 id="opponentName">AI Bot</h3>
+                        <div class="stat">
+                            <span class="label">💰 Gold:</span>
+                            <span id="opponentGold" class="value">600</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">🛢️ Oil:</span>
+                            <span id="opponentOil" class="value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">🏘️ Territory:</span>
+                            <span id="opponentTerritory" class="value">1</span>
+                        </div>
+                    </div>
+                </div>
+
                 <button id="menuBtn" class="btn btn-small">Menu</button>
             </div>
 
@@ -59,7 +106,7 @@
         <!-- Settings Screen -->
         <div id="settings" class="screen">
             <div class="settings-container">
-                <h2>Settings</h2>
+                <h2>⚙️ Settings</h2>
                 <div class="setting">
                     <label>Game Speed:</label>
                     <input type="range" id="speedSlider" min="0.5" max="2" step="0.5" value="1">
@@ -67,6 +114,12 @@
                 <div class="setting">
                     <label>Volume:</label>
                     <input type="range" id="volumeSlider" min="0" max="100" step="10" value="50">
+                </div>
+                <div class="setting">
+                    <label>
+                        <input type="checkbox" id="soundToggle" checked>
+                        Sound Effects
+                    </label>
                 </div>
                 <button id="backBtn" class="btn btn-secondary">Back</button>
             </div>
