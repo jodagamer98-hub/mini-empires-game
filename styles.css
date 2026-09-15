@@ -40,12 +40,14 @@ body {
 
 .menu-container {
     text-align: center;
+    animation: slideIn 0.5s ease;
 }
 
 .menu-container h1 {
     font-size: 4rem;
     margin-bottom: 10px;
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    animation: pulse 2s infinite;
 }
 
 .subtitle {
@@ -54,41 +56,107 @@ body {
     opacity: 0.9;
 }
 
+/* Game Mode Selection */
+#gameMode {
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    flex-direction: column;
+}
+
+.mode-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 600px;
+}
+
+.mode-container h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.mode-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.mode-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.mode-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.mode-card p {
+    margin-bottom: 15px;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.mode-card .btn {
+    margin: 5px;
+}
+
 /* Buttons */
 .btn {
     padding: 12px 30px;
     margin: 10px;
     font-size: 1rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: scale(0.98);
 }
 
 .btn-primary {
-    background: #ff6b6b;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
     color: white;
 }
 
 .btn-primary:hover {
-    background: #ff5252;
-    transform: scale(1.05);
+    background: linear-gradient(135deg, #ff5252 0%, #ff1744 100%);
 }
 
 .btn-secondary {
-    background: #4ecdc4;
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
     color: white;
 }
 
 .btn-secondary:hover {
-    background: #45b7aa;
-    transform: scale(1.05);
+    background: linear-gradient(135deg, #45b7aa 0%, #38926f 100%);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
 }
 
 .btn-small {
     padding: 8px 15px;
     font-size: 0.9rem;
+    margin: 5px;
 }
 
 /* Game Screen */
@@ -98,34 +166,67 @@ body {
 }
 
 .game-header {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 15px 20px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.5) 100%);
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #4ecdc4;
+    border-bottom: 3px solid #4ecdc4;
+    gap: 20px;
 }
 
-.stats {
-    display: flex;
-    gap: 40px;
+.player-stats,
+.opponent-stats {
+    flex: 1;
+}
+
+.player-info,
+.opponent-info {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #00ff00;
+}
+
+.opponent-info {
+    border-left-color: #ff0000;
+    text-align: right;
+}
+
+.player-info h3,
+.opponent-info h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 
 .stat {
     display: flex;
     gap: 10px;
     align-items: center;
+    margin: 8px 0;
+    font-size: 0.95rem;
+}
+
+.opponent-info .stat {
+    justify-content: flex-end;
 }
 
 .stat .label {
-    font-weight: bold;
     color: #aaa;
 }
 
 .stat .value {
-    font-size: 1.3rem;
-    color: #ff6b6b;
+    font-size: 1.2rem;
+    color: #ffd700;
     font-weight: bold;
+}
+
+.vs-divider {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff6b6b;
+    padding: 0 20px;
+    animation: blink 1.5s infinite;
 }
 
 .game-container {
@@ -140,29 +241,37 @@ body {
     position: relative;
     background: #0f0f1e;
     overflow: hidden;
+    border: 2px solid #4ecdc4;
 }
 
 #gameCanvas {
     display: block;
     width: 100%;
     height: 100%;
+    cursor: crosshair;
 }
 
 .bottom-panel {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     padding: 15px 20px;
     border-top: 2px solid #4ecdc4;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .tile-info {
-    margin-bottom: 10px;
-    font-size: 0.9rem;
+    margin-bottom: 15px;
+    font-size: 1rem;
     color: #aaa;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    border-left: 3px solid #ffd700;
 }
 
 .actions {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
 }
 
@@ -174,10 +283,12 @@ body {
 }
 
 .settings-container {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.4);
     padding: 40px;
-    border-radius: 10px;
+    border-radius: 15px;
     text-align: center;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .settings-container h2 {
@@ -186,30 +297,136 @@ body {
 }
 
 .setting {
-    margin: 20px 0;
+    margin: 25px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
 }
 
 .setting label {
-    min-width: 100px;
+    min-width: 150px;
     text-align: left;
+    font-weight: 500;
 }
 
 .setting input[type="range"] {
     width: 200px;
+    cursor: pointer;
+}
+
+.setting input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes blink {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0.5;
+    }
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+    .game-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .player-info,
+    .opponent-info {
+        font-size: 0.9rem;
+    }
+
+    .stat {
+        font-size: 0.85rem;
+    }
+}
+
 @media (max-width: 768px) {
     .menu-container h1 {
         font-size: 2.5rem;
     }
 
-    .stats {
-        gap: 20px;
-        font-size: 0.9rem;
+    .mode-container {
+        max-width: 90%;
     }
+
+    .game-header {
+        padding: 15px;
+        flex-direction: column;
+    }
+
+    .vs-divider {
+        display: none;
+    }
+
+    .player-stats,
+    .opponent-stats {
+        width: 100%;
+    }
+
+    .opponent-info {
+        text-align: left;
+    }
+
+    .opponent-info .stat {
+        justify-content: flex-start;
+    }
+
+    .setting {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .setting input[type="range"] {
+        width: 100%;
+    }
+}
+
+/* Scrollbar styling */
+.bottom-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.bottom-panel::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.bottom-panel::-webkit-scrollbar-thumb {
+    background: #4ecdc4;
+    border-radius: 4px;
+}
+
+.bottom-panel::-webkit-scrollbar-thumb:hover {
+    background: #45b7aa;
 }
